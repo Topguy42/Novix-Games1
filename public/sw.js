@@ -1,3 +1,4 @@
+/* global $scramjetLoadWorker */
 // dumb hack to allow firefox to work (please dont do this in prod)
 if (navigator.userAgent.includes("Firefox")) {
   Object.defineProperty(globalThis, "crossOriginIsolated", {

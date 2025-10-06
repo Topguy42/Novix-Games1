@@ -77,44 +77,53 @@ If you would like to use one of the following buttons to deploy
 
 - https://\*.supergisfire.com.cdn.cloudflare.net/
 
-Lightspeed:
-https://supergisfire.com.cdn.cloudflare.net/
-https://51.222.141.36.ip.addr.tools/
-https://ffd.travelpage.biz/ https://snoopyshouldbeadmintrust.jobvn.com/
-https://reallyhardenglishcourses.neo-space.space/
-https://fastermath.neo-space.space/
-https://nice.neo-space.space/
-https://civics.jobvn.com/
-https://english.jobvn.com/
-https://dashboard.adidasnmdcitysock.com.cdn.cloudflare.net/
+### **Lightspeed**
 
-Goguardian:
-https://mathhelp.moorcroftmr.uk/
-https://mathhelp.deezpotatos.cc/
-https://sciencias.rawal-karan.com.np/
-https://sciencias.redinfosys.com/
-https://thisistakingtoolong.dj-jam.be/
+- [https://supergisfire.com.cdn.cloudflare.net](supergisfire.com.cdn.cloudflare.net)
+- [https://51.222.141.36.ip.addr.tools](51.222.141.36.ip.addr.tools)
+- [https://ffd.travelpage.biz](ffd.travelpage.biz)
+- [https://snoopyshouldbeadmintrust.jobvn.com](snoopyshouldbeadmintrust.jobvn.com)
+- [https://reallyhardenglishcourses.neo-space.space](reallyhardenglishcourses.neo-space.space)
+- [https://fastermath.neo-space.space](fastermath.neo-space.space)
+- [https://nice.neo-space.space](nice.neo-space.space)
+- [https://civics.jobvn.com](civics.jobvn.com)
+- [https://english.jobvn.com](english.jobvn.com)
+- [https://dashboard.adidasnmdcitysock.com.cdn.cloudflare.net](dashboard.adidasnmdcitysock.com.cdn.cloudflare.net)
 
-Securly:
-https://boing.macleod.nom.za/
-https://type.shela.nu/
-https://1copa.1copa.com/
-https://yayjobs.juniorjobs.ro/
+### **Goguardian**
 
-Content Keeper:
-https://theythem.itfiredup.com/
-https://yoooooo.itfiredup.com/
+- [https://mathhelp.moorcroftmr.uk](mathhelp.moorcroftmr.uk)
+- [https://mathhelp.deezpotatos.cc](mathhelp.deezpotatos.cc)
+- [https://sciencias.rawal-karan.com.np](sciencias.rawal-karan.com.np)
+- [https://sciencias.redinfosys.com](sciencias.redinfosys.com)
+- [https://thisistakingtoolong.dj-jam.be](thisistakingtoolong.dj-jam.be)
 
-Linewize:
-https://yoooo.primatools.ro/
-https://happy.primatools.ro/
+### **Securly**
 
-Palo Alto:
-https://petezahmybeloved.shela.nu/
-https://ilikemath.shela.nu/
+- [https://boing.macleod.nom.za](boing.macleod.nom.za)
+- [https://type.shela.nu](type.shela.nu)
+- [https://1copa.1copa.com](1copa.1copa.com)
+- [https://yayjobs.juniorjobs.ro](yayjobs.juniorjobs.ro)
 
-Blocksi:
-https://precalculuslessons.dj-jam.be/
+### **Content Keeper**
 
-Cisco Umbrella:
-https://blueinfosys.redinfosys.com/
+- [https://theythem.itfiredup.com](theythem.itfiredup.com)
+- [https://yoooooo.itfiredup.com](yoooooo.itfiredup.com)
+
+### **Linewize**
+
+- [https://yoooo.primatools.ro](yoooo.primatools.ro)
+- [https://happy.primatools.ro](happy.primatools.ro)
+
+### **Palo Alto**
+
+- [https://petezahmybeloved.shela.nu](petezahmybeloved.shela.nu)
+- [https://ilikemath.shela.nu](ilikemath.shela.nu)
+
+### **Blocksi**
+
+- [https://precalculuslessons.dj-jam.be](precalculuslessons.dj-jam.be)
+
+### **Cisco Umbrella**
+
+- [https://blueinfosys.redinfosys.com](blueinfosys.redinfosys.com)

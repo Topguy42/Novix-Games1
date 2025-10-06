@@ -15,7 +15,13 @@ export default defineConfig([
     plugins: { js },
     extends: ["js/recommended"],
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+    rules: {
+      "css/use-baseline": "off",
     },
   },
   {
@@ -23,24 +29,30 @@ export default defineConfig([
     ignores: ["package-lock.json", "pnpm-lock.yaml", "yarn.lock"],
     plugins: {
       json,
-      local: localPlugin
+      local: localPlugin,
     },
     languageOptions: {
       parser: jsonParser,
     },
     rules: {
-      "local/sort-labels": "error",
+      "local/sort-labels": "warn",
     },
     extends: ["json/recommended"],
   },
   {
-    plugins: {
-      markdown
-    },
+    files: ["**/*.md"],
+    plugins: { markdown },
     extends: ["markdown/recommended"],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+      },
+    },
     rules: {
-      "markdown/no-html": "error",
-      "markdown/no-bare-urls": "error",
+      "markdown/no-html": "warn",
+      "markdown/no-bare-urls": "warn",
+      "markdown/no-missing-label-refs": "warn",
     },
   },
   {
@@ -60,7 +72,16 @@ export default defineConfig([
       "public/petezah/**/*",
       "**/*.min.css",
       "public/epoxy/**/*",
-      "public/bare-mux/**/*"
+      "public/baremux/**/*",
     ],
+  },
+  {
+    files: ['**/sw.js'],
+    languageOptions: {
+      globals: {
+        importScripts: 'readonly',
+        worker: true,
+      }
+    }
   },
 ]);

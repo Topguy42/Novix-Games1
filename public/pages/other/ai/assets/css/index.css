@@ -118,7 +118,7 @@ body {
 }
 
 #nprogress .bar {
-  background: #ffffff !important;
+  background: #ffffff;
   height: 2px;
   box-shadow: 0 0 8px #ffffffcc;
 }
@@ -126,12 +126,12 @@ body {
 #nprogress .peg {
   box-shadow:
     0 0 10px #ffffffcc,
-    0 0 5px #ffffffcc !important;
+    0 0 5px #ffffffcc;
 }
 
 #nprogress .spinner-icon {
-  border-top-color: #ffffff !important;
-  border-left-color: #ffffff !important;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
 }
 
 .chat-container {
@@ -493,6 +493,7 @@ pre {
   transform: translate(-50%, -50%);
   text-align: center;
   background: linear-gradient(90deg, #ffffff 0%, #a0a0a0 15%, #5e5e5e 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   pointer-events: none;

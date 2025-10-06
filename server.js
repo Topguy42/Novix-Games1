@@ -5,7 +5,6 @@ import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import { scramjetPath } from "@mercuryworkshop/scramjet/path";
 import { server as wisp } from "@mercuryworkshop/wisp-js/server";
-import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { createBareServer } from "@tomphttp/bare-server-node";
 import path, { join } from "node:path";
 import { hostname } from "node:os";
@@ -27,7 +26,7 @@ if (fs.existsSync(envFile)) {
 }
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const { SUPABASE_URL, SUPABASE_KEY, SUPABASE_SERVICE_ROLE_KEY } = process.env;
+const { SUPABASE_URL, SUPABASE_KEY } = process.env;
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const bare = createBareServer("/bare/");
 const app = express();
@@ -54,6 +53,7 @@ app.use(
 app.use(express.static(publicPath));
 app.use(express.static("public"));
 app.use("/scram/", express.static(scramjetPath));
+app.use("/libcurl/", express.static(libcurlPath));
 // Also serve common scramjet asset names at the site root for legacy references
 // (this avoids copying files into the repo root and keeps a single source)
 app.get("/scramjet.all.js", (req, res) => {

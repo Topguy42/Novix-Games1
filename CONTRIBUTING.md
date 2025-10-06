@@ -1,3 +1,5 @@
+<!-- eslint-disable markdown/no-html -->
+
 # Contributing to PeteZahGames
 
 Thanks for your interest in contributing!
@@ -9,19 +11,19 @@ This document outlines the conventions and rules for working in this repository.
 
 Use clear prefixes in your commit messages to describe the type of change:
 
-- **Add:** for new features, routes, or pages  
+- **Add:** for new features, routes, or pages
   _Example: `Add: new /api/profile endpoint`_
 
-- **Fix:** for bug fixes or patches  
+- **Fix:** for bug fixes or patches
   _Example: `Fix: session token not persisting in /api/signin`_
 
-- **Update:** for dependency bumps, config changes, or non-breaking improvements  
+- **Update:** for dependency bumps, config changes, or non-breaking improvements
   _Example: `Update: pnpm-lock.yaml with latest @mercuryworkshop packages`_
 
-- **Docs:** for documentation-only changes  
+- **Docs:** for documentation-only changes
   _Example: `Docs: expand README with deployment notes`_
 
-- **Chore:** for maintenance tasks (linting, formatting, CI/CD tweaks)  
+- **Chore:** for maintenance tasks (linting, formatting, CI/CD tweaks)
   _Example: `Chore: add .gitpod.yml for dev environments`_
 
 Keep messages short but descriptive. Use the imperative mood (“Add”, not “Added”).
