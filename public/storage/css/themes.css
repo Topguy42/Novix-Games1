@@ -1,4 +1,3 @@
-/* Theme Classes */
 body.theme-default {
   --primary-gradient: linear-gradient(90deg, #3c5b8e, #4a6fa5);
   --hover-gradient: linear-gradient(90deg, #2a3c5f, #3c5b8e);

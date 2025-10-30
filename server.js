@@ -21,6 +21,7 @@ import path, { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { signinHandler } from './server/api/signin.js';
 import { signupHandler } from './server/api/signup.js';
+import { createProxyMiddleware } from "http-proxy-middleware";
 
 const cache = new NodeCache({ stdTTL: 86400 });
 let SESSION_SECRET;
@@ -139,7 +140,22 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/results/:query', async (req, res) => {
+const redirectRoutes = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "config", "redirectitems.json"), "utf8")
+);
+
+redirectRoutes.forEach(({ path, target }) => {
+  app.use(
+    path,
+    createProxyMiddleware({
+      target,
+      changeOrigin: true,
+      pathRewrite: { [`^${path}`]: "" },
+    })
+  );
+});
+
+app.get("/results/:query", async (req, res) => {
   try {
     const query = req.params.query.toLowerCase();
     const response = await fetch(`http://api.duckduckgo.com/ac?q=${encodeURIComponent(query)}&format=json`);

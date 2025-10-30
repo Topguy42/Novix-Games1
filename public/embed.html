@@ -25,11 +25,9 @@
         font-weight: 400;
         font-style: normal;
       }
-
       * {
         box-sizing: border-box;
       }
-
       body,
       html {
         margin: 0;
@@ -43,7 +41,6 @@
         animation: bgShift 20s ease-in-out infinite;
         position: relative;
       }
-
       @keyframes bgShift {
         0% {
           background-position: 0% 50%;
@@ -55,7 +52,6 @@
           background-position: 0% 50%;
         }
       }
-
       #loading-screen {
         display: flex;
         flex-direction: column;
@@ -71,7 +67,6 @@
         color: #d0eaff;
         pointer-events: none;
       }
-
       .spinner {
         width: 140px;
         height: 140px;
@@ -79,21 +74,18 @@
         margin-bottom: 20px;
         filter: drop-shadow(0 0 12px #00bfff);
       }
-
       .spinner-circle {
         position: absolute;
         border: 8px solid transparent;
         border-radius: 50%;
         animation: spin 1.8s linear infinite;
       }
-
       .spinner-circle:nth-child(1) {
         width: 100%;
         height: 100%;
         border-top-color: #00bfff;
         border-left-color: #0074d9;
       }
-
       .spinner-circle:nth-child(2) {
         width: 72%;
         height: 72%;
@@ -104,7 +96,6 @@
         animation-duration: 2.5s;
         animation-direction: reverse;
       }
-
       @keyframes spin {
         from {
           transform: rotate(0deg);
@@ -113,7 +104,6 @@
           transform: rotate(360deg);
         }
       }
-
       #glitch-text {
         font-size: 36px;
         font-weight: 700;
@@ -124,13 +114,12 @@
         text-shadow:
           0 0 10px #00bfff,
           0 0 20px #0074d9,
-          0 0 30大的px #0055aa,
+          0 0 30px #0055aa,
           0 0 50px #003366;
         animation:
           glowPulse 2s ease-in-out infinite,
           bounce 3s ease-in-out infinite;
       }
-
       @keyframes glowPulse {
         0% {
           text-shadow:
@@ -154,7 +143,6 @@
             0 0 30px #003366;
         }
       }
-
       @keyframes bounce {
         0%,
         100% {
@@ -164,7 +152,6 @@
           transform: translateY(-5px);
         }
       }
-
       .stars {
         position: absolute;
         width: 100%;
@@ -174,14 +161,12 @@
         z-index: 0;
         pointer-events: none;
       }
-
       #iframe-container {
         width: 100%;
         height: 100%;
         display: none;
         z-index: 1;
       }
-
       #iframe-container iframe {
         width: 100%;
         height: 100%;
@@ -196,7 +181,6 @@
     <script src="/scram/scramjet.all.js"></script>
     <script src="/config.js"></script>
   </head>
-
   <body>
     <div class="stars"></div>
     <div id="loading-screen">
@@ -207,7 +191,6 @@
       <p id="glitch-text">LOADING</p>
     </div>
     <div id="iframe-container"></div>
-
     <script>
       const target = document.getElementById('glitch-text');
       const original = target.textContent;
@@ -335,6 +318,11 @@
       window.addEventListener('load', async () => {
         await loadFromHash();
       });
+      if (location.pathname === '/embed.html' && location.hash) {
+        location.replace('/static/embed.html' + location.hash);
+      } else if (location.pathname !== '/static/embed.html') {
+        location.replace('/static/embed.html');
+      }
     </script>
   </body>
 </html>
