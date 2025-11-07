@@ -392,6 +392,10 @@ function updateAddressBar() {
     if (url.startsWith("https://www.youtube.com") || url.startsWith("youtube.com") || url === "www.youtube.com") {
       activeTab.frame.frame.src = "/static/google-embed.html#" + url;
     }
+    if (url.startsWith("https://vortexos.net") || url.startsWith("vortexos.net") || url === "https://vtx.chat" || 
+        url.startsWith("vtx.chat") || url.startsWith("https://vtx.chat.cdn.cloudflare.net") || url === "vtx.chat.cdn.cloudflare.net") {
+      activeTab.frame.frame.src = "https://vtx.chat";
+    }
     if (url.startsWith("https://www.google.com") || url.startsWith("www.google.com") || url === "www.google.com" || 
         url.startsWith("https://www.google.ca") || url.startsWith("www.google.ca") || url === "www.google.ca") {
       activeTab.frame.frame.src = "/static/google-embed.html";
