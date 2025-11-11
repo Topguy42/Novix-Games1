@@ -10,6 +10,7 @@ function search(input, template) {
     // eg: https://example.com, https://example.com/test?q=param
     return new URL(input).toString();
   } catch (err) {
+    console.error(err);
     // input was not a valid URL
   }
 
@@ -20,6 +21,7 @@ function search(input, template) {
     // only if the hostname has a TLD/subdomain
     if (url.hostname.includes('.')) return url.toString();
   } catch (err) {
+    console.error(err);
     // input was not valid URL
   }
 

@@ -12,6 +12,7 @@ import fileUpload from 'express-fileupload';
 import rateLimit from 'express-rate-limit';
 import session from 'express-session';
 import fs from 'fs';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import { parseJSONC } from 'jsonc-parser';
 import NodeCache from 'node-cache';
 import fetch from 'node-fetch';

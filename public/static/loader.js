@@ -4,9 +4,15 @@ function submitSearch(event) {
   let embedUrl = '';
 
   if (query) {
-    const isValidUrl = /^(https?:\/\/)?([\w\d-]+\.)+[\w\d]{2,}([\/\w\d-]*)*(\?[^\s]*)?(#[^\s]*)?$/i.test(query);
-
-    if (isValidUrl) {
+    function isValidUrl(str) {
+      try {
+        new URL(str);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+    if (isValidUrl(query)) {
       embedUrl = `/static/youtube-embed.html#https://${encodeURIComponent(query)}`;
     } else {
       embedUrl = `/static/youtube-embed.html#https://www.google.com/search?q=${encodeURIComponent(query)}`;

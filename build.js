@@ -1,4 +1,3 @@
-// build.js
 import { execSync, spawn } from 'child_process';
 import { createWriteStream, promises as fs } from 'fs';
 import fse from 'fs-extra';
@@ -6,6 +5,7 @@ import ignore from 'ignore';
 import git from 'isomorphic-git';
 import minimist from 'minimist';
 import os from 'os';
+import pLimit from 'p-limit';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
@@ -101,8 +101,8 @@ const Submodules = ['scramjet', 'ultraviolet'];
 
 // --- Build commands ---
 const buildCommands = {
-  scramjet: "CI=true pnpm install && PATH='$HOME/.cargo/bin:$PATH' npm run rewriter:build && npm run build:all",
-  ultraviolet: 'CI=true pnpm install --ignore-workspace-root-check && pnpm run build'
+  //scramjet: "CI=true pnpm install && PATH='$HOME/.cargo/bin:$PATH' npm run rewriter:build && npm run build:all",
+  ultraviolet: 'CI=true npm install && npm run build'
 };
 const YELLOW = '\x1b[33m';
 const GREEN = '\x1b[32m';
@@ -368,40 +368,48 @@ async function crawlAsync(dir, baseUrl = '') {
     const entries = await fse.readdir(dir, { withFileTypes: true });
 
     // Process directories and files in parallel
-    const processPromises = entries.map(async (entry) => {
-      const full = path.join(dir, entry.name);
-
-      try {
-        if (entry.isDirectory()) {
-          const children = await crawlAsync(full, baseUrl + '/' + entry.name);
-          results.push(...children);
-          return;
-        }
-
-        const ext = path.extname(entry.name).toLowerCase();
-        if (!VALID_EXTENSIONS.has(ext)) return;
-
-        // Sanitize and validate URL path
-        const urlPath = ext === HTML_EXT && entry.name.toLowerCase() === 'index.html' ? (baseUrl === '' ? '/' : baseUrl) : baseUrl + '/' + entry.name;
-
-        const sanitizedPath = urlPath.replace(/\/+/g, '/').replace(/[^\x20-\x7E]/g, '');
+    const limit = pLimit(os.cpus().length * 2);
+    const processPromises = entries.map((entry) =>
+      limit(async () => {
+        const full = path.join(dir, entry.name);
 
         try {
-          const stat = await fse.stat(full);
-          results.push({
-            filePath: full,
-            loc: sanitizedPath,
-            lastmod: stat.mtime.toISOString(),
-            ext,
-            commitCount: 0
-          });
-        } catch (statErr) {
-          console.warn(`Warning: Could not stat file ${full}: ${statErr.message}`);
+          if (entry.isDirectory()) {
+            const children = await crawlAsync(full, baseUrl + '/' + entry.name);
+            results.push(...children);
+            return;
+          }
+
+          const ext = path.extname(entry.name).toLowerCase();
+          if (!VALID_EXTENSIONS.has(ext)) return;
+
+          // Sanitize and validate URL path
+          const urlPath =
+            ext === HTML_EXT && entry.name.toLowerCase() === 'index.html' ? (baseUrl === '' ? '/' : baseUrl) : baseUrl + '/' + entry.name;
+
+          const sanitizedPath = urlPath.replace(/\/+/g, '/').replace(/[^\x20-\x7E]/g, '');
+
+          try {
+            const stat = await fse.stat(full);
+            const cached = gitCache.get(full);
+            if (cached && cached.lastmod === stat.mtime.toISOString()) {
+              return;
+            }
+            results.push({
+              filePath: full,
+              loc: sanitizedPath,
+              lastmod: stat.mtime.toISOString(),
+              ext,
+              commitCount: 0
+            });
+          } catch (statErr) {
+            console.warn(`Warning: Could not stat file ${full}: ${statErr.message}`);
+          }
+        } catch (err) {
+          console.warn(`Warning: Error processing ${full}: ${err.message}`);
         }
-      } catch (err) {
-        console.warn(`Warning: Error processing ${full}: ${err.message}`);
-      }
-    });
+      })
+    );
 
     await Promise.all(processPromises);
     return results;
@@ -410,10 +418,6 @@ async function crawlAsync(dir, baseUrl = '') {
     return [];
   }
 }
-
-// execPromise removed; replaced by isomorphic-git
-
-// Use isomorphic-git for fast, native git metadata with caching
 const workdir = __dirname;
 const gitCache = new Map();
 
@@ -453,7 +457,7 @@ function withConcurrencyLimit(items, limit, fn, flushCallback = null, options = 
   let i = 0;
   let activeWorkers = 0;
   const maxMemoryUsage = options.maxMemoryUsage || 0.8;
-  const flushInterval = options.flushInterval || 100; // flush every N items
+  const flushInterval = options.flushInterval || 100;
   let lastFlushIndex = 0;
   if (DEBUG) {
     console.log(`withConcurrencyLimit: limit=${limit}, maxMemoryUsage=${maxMemoryUsage}, flushInterval=${flushInterval}`);
@@ -633,7 +637,7 @@ async function main() {
         async ({ entry, gitData: dirGitData }) => {
           try {
             let gitData = dirGitData;
-            if (!gitData || !gitData.lastmod) {
+            if (!gitData || !gitData.lastmod || gitData.commitCount === 0) {
               gitData = await getFileGitData(entry.filePath);
             }
 

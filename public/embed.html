@@ -110,7 +110,7 @@
             return;
           } catch (e) {
             try {
-              await connection.setTransport('/baremux/index.mjs', [store.bareurl]);
+              await connection.setTransport('/baremod/index.mjs', [store.bareurl]);
               return;
             } catch (e2) {
               try {

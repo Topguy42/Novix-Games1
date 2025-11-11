@@ -1,12 +1,3 @@
-// PeteZahGames Terraform config for deploying to Google Cloud Run
-// Expanded from placeholder. This provisions:
-// - Google Cloud project + region
-// - Artifact Registry for container images
-// - Cloud Run service for the Express app
-// - IAM bindings for public access
-// - Environment variables for Supabase auth
-// - Outputs for service URL
-
 terraform {
   required_version = ">= 1.0"
 
