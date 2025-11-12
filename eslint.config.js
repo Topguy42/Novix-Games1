@@ -72,12 +72,12 @@ export default defineConfig([
     ]
   },
   {
-    files: ['**/sw.js'],
+    files: ['**/*sw.js'],
     languageOptions: {
       globals: {
         importScripts: 'readonly',
-        worker: true
+        serviceworker: true
       }
-    }
+    },
   }
 ]);

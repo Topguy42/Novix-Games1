@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
-  <<<<<<< HEAD
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Google Tag Manager -->
     <script>
       (function (w, d, s, l, i) {
@@ -36,43 +37,11 @@
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6640595376330309"
       crossorigin="anonymous"
     ></script>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta property="benrogo:index" , content="index" />
-    <meta property="benrogo:uvpath" , content="/static/uv/uv.config.js" />
-
-    <title>PeteZah</title>
+    <title>PeteZah | Changelog</title>
     <link rel="icon" type="icon/x-icon" href="storage/images/logo-png-removebg-preview.png" />
-
     <meta name="description" content="PeteZah, privacy tool" />
     <meta name="keywords" content="security, privacy" />
-    <style>
-            #loadingMessage {
-              width: 100%;
-              height: 100%;
-              z-index: 1000;
-              background: #ccc;
-              top: 0px;
-              left: 0px;
-              position: absolute;
-              inset: 0;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-
-            .feedback-iframe {
-              position: absolute;
-      =======
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PeteZah | Changelog</title>
-        <link rel="icon" type="image/x-icon" href="/storage/images/logo-png-removebg-preview.png">
-        <link rel="stylesheet" href="/storage/css/themes.css">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <style>
           * {
             margin: 0;
@@ -89,7 +58,6 @@
           }
           .god-rays {
               position: fixed;
-      >>>>>>> e767eccf49ea9e5655039040223fa299d80481fd
               top: 0;
               left: 0;
               width: 100%;
@@ -316,108 +284,6 @@
     </style>
   </head>
   <body>
-    <div class="god-rays"></div>
-    <div class="container">
-      <div class="header">
-        <h1>Changelog</h1>
-        <button class="add-btn" id="add-btn" title="Add Changelog Entry" style="display: none"><i class="fas fa-plus"></i></button>
-      </div>
-
-      <div class="section">
-        <div id="changelog-list">
-          <div class="empty-state">Loading changelog...</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal" id="changelog-modal">
-      <div class="modal-content">
-        <button class="modal-close" id="close-modal"><i class="fas fa-times"></i></button>
-        <h2 style="margin-bottom: 24px; font-size: 1.5rem; font-weight: 600">Create Changelog Entry</h2>
-        <form id="changelog-form">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" id="title" required />
-          </div>
-          <div class="form-group">
-            <label for="content">Content</label>
-            <textarea id="content" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-full" id="submit-btn"><i class="fas fa-paper-plane"></i> Create Entry</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="modal" id="comment-modal" style="display: none">
-      <div class="modal-content">
-        <button class="modal-close" id="close-comment-modal"><i class="fas fa-times"></i></button>
-        <h2 style="margin-bottom: 18px; font-size: 1.2rem; font-weight: 600">Comments</h2>
-        <div id="comment-modal-list" style="max-height: 200px; overflow-y: auto; margin-bottom: 12px"></div>
-        <form id="comment-form">
-          <textarea
-            id="comment-content"
-            placeholder="Add a comment..."
-            required
-            style="width: 100%; background: transparent; border: 1px solid #445566; color: #fff; padding: 8px; border-radius: 8px"
-          ></textarea>
-          <button type="submit" class="btn btn-full" id="submit-comment-btn" style="margin-top: 10px"><i class="fas fa-paper-plane"></i> Post</button>
-        </form>
-      </div>
-    </div>
-
-    <script src="/storage/js/popup.js"></script>
-    <script>
-          let isAdmin = false;
-
-          async function checkAdmin() {
-            try {
-              const response = await fetch('/api/profile', { credentials: 'include' });
-              if (response.ok) {
-                const data = await response.json();
-                isAdmin = data.user.app_metadata?.is_admin || false;
-                if (isAdmin) {
-                  document.getElementById('add-btn').style.display = 'flex';
-                }
-              }
-            } catch (error) {
-              console.error('Admin check error:', error);
-            }
-          }
-
-          async function loadChangelog() {
-            try {
-              const response = await fetch('/api/changelog');
-              const data = await response.json();
-
-              const list = document.getElementById('changelog-list');
-              if (data.changelogs && data.changelogs.length > 0) {
-                list.innerHTML = data.changelogs.map(item => {
-                  const date = new Date(item.created_at);
-                  return `
-                    <div class="changelog-item">
-                      <div class="header-item">
-                        <img src="/storage/images/logo-png-removebg-preview.png" alt="PeteZah" class="author-icon">
-                        <h3>${item.title}</h3>
-                      </div>
-                      <div class="meta">By ${item.author_name || 'PeteZah'} • ${date.toLocaleDateString()}</div>
-                      <div class="content">${item.content}</div>
-                      <div style="margin-top:12px;display:flex;gap:12px;">
-                        <button class="btn" style="background:#232b36;color:#3b82f6;padding:4px 18px;font-size:1em;box-shadow:0 1px 4px rgba(59,130,246,0.04);" onclick="likeChangelog('${item.id}', this)"><i class="fa fa-thumbs-up"></i> <span class="like-count" data-id="${item.id}">0</span></button>
-                        <button class="btn" style="background:#232b36;padding:4px 18px;font-size:1em;box-shadow:0 1px 4px rgba(139,92,246,0.04);" onclick="openCommentModal('changelog','${item.id}')"><i class="fa fa-comment" style="color:#fff;"></i></button>
-                      </div>
-                      <div class="comments-list" id="comments-changelog-${item.id}" style="margin-top:10px;"></div>
-                    </div>
-                  `;
-                }).join('');
-              } else {
-                list.innerHTML = '<div class="empty-state">No changelog entries yet.</div>';
-              }
-            } catch (error) {
-              showPopup('Failed to load changelog', 'error');
-            }
-          }
-
-      <<<<<<< HEAD
         <body>
           <!-- Google Tag Manager (noscript) -->
           <noscript
@@ -428,7 +294,6 @@
           <script>
             $('#feedbackFrame').ready(function () {
               $('#loadingMessage').css('display', 'none');
-      =======
           function likeChangelog(id, btn) {
             fetch('/api/like', {method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({type:'changelog',targetId:id})})
               .then(r=>r.json()).then(d=>{
@@ -443,14 +308,8 @@
               const r = await fetch(`/api/likes?type=changelog&targetId=${id}`);
               const d = await r.json();
               el.textContent = d.count||0;
-      >>>>>>> e767eccf49ea9e5655039040223fa299d80481fd
             });
           }
-
-      <<<<<<< HEAD
-            $('#feedbackFrame').load(function () {
-              $('#loadingMessage').css('display', 'none');
-      =======
           function openCommentModal(type, id) {
             window._commentType = type;
             window._commentTarget = id;
@@ -490,15 +349,8 @@
               } else {
                 list.innerHTML = '<div style="color:#99aabb;">No comments yet.</div>';
               }
-      >>>>>>> e767eccf49ea9e5655039040223fa299d80481fd
             });
           }
-
-      <<<<<<< HEAD
-          <iframe src="/static/embed.html#https://petezah.feedbase.app/changelog" class="feedback-iframe" id="feedbackFrame" title="Changelog" />
-          <div id="loadingMessage">Loading...</div>
-        </body>
-      =======
           document.getElementById('add-btn').addEventListener('click', () => {
             document.getElementById('changelog-modal').classList.add('active');
           });
@@ -545,7 +397,7 @@
           checkAdmin();
           loadChangelog();
           setTimeout(loadChangelogLikes, 500);
+        });
     </script>
   </body>
-  >>>>>>> e767eccf49ea9e5655039040223fa299d80481fd
 </html>

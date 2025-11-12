@@ -222,6 +222,11 @@ ssh-keygen
 # 14. Your personal bot token (if you added x-bot-token or similar)
 *.token
 
+# 15. Auto Generated files
+.eslintcache
+.sitemap-base.json
+
+
 # ==========================
 # FINAL SAFETY NET (NUKE EVERYTHING DANGEROUS)
 # ==========================

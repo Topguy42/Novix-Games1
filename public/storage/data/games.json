@@ -11,10 +11,6 @@
       "url": "/iframe.html?url=/storage/ag/g/1v1lol/",
       "imageUrl": "/storage/ag/g/1v1lol/splash.png",
       "categories": ["shooting"]
-      "label": "1v1.LoL",
-      "imageUrl": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/58.png",
-      "url": "/iframe.html?url=/pages/other/interpreter/index.html?url=https://cdn.jsdelivr.net/gh/gn-math/html@main/58.html",
-      "categories": []
     },
     {
       "label": "Tag",
@@ -74,10 +70,7 @@
       "label": "Clash Royale",
       "url": "/iframe.html?url=/storage/ag/g/clash-royale",
       "imageUrl": "/storage/images/main/clash.jpeg",
-      "categories": [
-        "skill",
-        "action"
-      ]
+      "categories": ["skill", "action"]
     },
     {
       "label": "Drive Mad",
@@ -101,10 +94,7 @@
       "label": "Sky Riders",
       "url": "/iframe.html?url=/storage/ag/g2/sky-riders/",
       "imageUrl": "/storage/images/main3/skyriders.png",
-      "categories": [
-        "action",
-        "racing"
-      ]
+      "categories": ["action", "racing"]
     },
     {
       "label": "Buckshot Roulette",
@@ -141,9 +131,7 @@
       "label": "Ehmorris Lander",
       "url": "/iframe.html?url=/embed.html#https://ehmorris.com/lander/",
       "imageUrl": "/storage/images/main/ehmorris.png",
-      "categories": [
-        "skill"
-      ]
+      "categories": ["skill"]
     },
     {
       "label": "Highway Racer",
