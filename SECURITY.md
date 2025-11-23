@@ -17,7 +17,7 @@ If you discover a security vulnerability in this project:
 1. **Do not open a public issue.**
 2. Report privately using one of these methods:
    - GitHub [Security Advisories](https://docs.github.com/en/code-security/security-advisories/repository-security-advisories).
-   - Email: [mailto:contact@petezahgames.com?subject=Security%20Advisory](mailto:contact@petezahgames.com?subject=Security%20Advisory).
+   - Email: [contact@petezahgames.com](mailto:contact@petezahgames.com?subject=Security%20Advisory).
    - Discord: https://discord.gg/cYjHFDguxS.
 
 Please include:
