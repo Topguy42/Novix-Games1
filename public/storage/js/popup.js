@@ -1,4 +1,4 @@
-function showPopup(message, type = 'info') {
+export function showPopup(message, type = 'info') {
   const popup = document.createElement('div');
   popup.className = `styled-popup ${type}`;
   popup.innerHTML = `

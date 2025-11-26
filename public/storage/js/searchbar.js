@@ -1,3 +1,4 @@
+import { __uv$config } from '/static/uv/uv.config.js';
 document.querySelector('.url-input').addEventListener('keyup', function (event) {
   if (event.keyCode === 13) {
     event.preventDefault();

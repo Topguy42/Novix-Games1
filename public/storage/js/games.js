@@ -91,14 +91,14 @@ function filterItems() {
   updateLoadMoreButton();
 }
 
-function randomGameOpen() {
+export function randomGameOpen() {
   if (games.length > 0) {
     const randomIndex = Math.floor(Math.random() * games.length);
     window.location.href = games[randomIndex].url;
   }
 }
 
-function filterByCategory() {
+export function filterByCategory() {
   filterItems();
 }
 

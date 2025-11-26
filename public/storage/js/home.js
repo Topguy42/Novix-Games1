@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 1000);
 });
 
-function startGaming() {
+export function startGaming() {
   window.location.href = 'g.html';
 }
 
@@ -49,7 +49,7 @@ function updateCarouselDots() {
   ).join('');
 }
 
-function goToCarouselSlide(index) {
+export function goToCarouselSlide(index) {
   currentCarouselIndex = index;
   moveCarousel(0);
 }

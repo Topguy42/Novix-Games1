@@ -1,4 +1,4 @@
-function exportLocalStorage() {
+export function exportLocalStorage() {
   const data = JSON.stringify(localStorage, null, 2);
   const blob = new Blob([data], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -10,7 +10,7 @@ function exportLocalStorage() {
 
   URL.revokeObjectURL(url);
 }
-function importLocalStorage() {
+export function importLocalStorage() {
   const fileInput = document.getElementById('fileInput');
   const file = fileInput.files[0];
 

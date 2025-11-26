@@ -1,10 +1,11 @@
+// @ts-check
 /**
  *
  * @param {string} input
  * @param {string} template Template for a search query.
  * @returns {string} Fully qualified URL
  */
-function search(input, template) {
+export function search(input, template) {
   try {
     // input is a valid URL:
     // eg: https://example.com, https://example.com/test?q=param

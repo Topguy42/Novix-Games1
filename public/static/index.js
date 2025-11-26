@@ -1,4 +1,7 @@
-'use strict';
+import { registerSW } from './register-sw.js';
+import { search } from './search.js';
+import { __uv$config } from './uv/uv.config.js';
+('use strict');
 /**
  * @type {HTMLFormElement}
  */
@@ -37,7 +40,7 @@ form.addEventListener('submit', async (event) => {
 });
 
 // Autofill function with auto-submit
-function autofill(url) {
+export function autofill(url) {
   address.value = url;
   form.requestSubmit(); // Automatically submit the form
 }

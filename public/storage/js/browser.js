@@ -1,3 +1,5 @@
+import { Sortable } from 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js';
+import { _CONFIG } from '/static/config.js';
 const { ScramjetController } = $scramjetLoadController();
 const scramjet = new ScramjetController({
   prefix: '/scramjet/',
@@ -524,7 +526,7 @@ function showHistory() {
     .slice()
     .reverse()
     .map(
-      (item, index) =>
+      (item) =>
         `<div class="history-item" onclick="createTab('${item.url}'); document.getElementById('iframe-container').appendChild(tabs[tabs.length-1].frame.frame); switchTab(tabs[tabs.length-1].id); document.getElementById('history-modal').close();">
           <span>${item.title}</span><br>
           <small>${item.url} - ${new Date(item.timestamp).toLocaleString()}</small>
@@ -533,33 +535,6 @@ function showHistory() {
     .join('');
   modal.showModal();
   toggleMenu();
-}
-
-function fixProxy() {
-  navigator.serviceWorker.getRegistrations().then((registrations) => {
-    const unregisterPromises = registrations.map((reg) =>
-      reg.unregister().then((success) => {
-        console.log(`Service Worker unregistered: ${success}`);
-      })
-    );
-
-    Promise.all(unregisterPromises).then(() => {
-      const dbName = '$scramjet';
-      const request = indexedDB.deleteDatabase(dbName);
-
-      request.onsuccess = () => {
-        console.log(`Deleted IndexedDB: ${dbName}`);
-      };
-      request.onerror = () => {
-        console.error(`Failed to delete IndexedDB: ${dbName}`);
-      };
-      request.onblocked = () => {
-        console.warn(`Delete blocked for IndexedDB: ${dbName}`);
-      };
-
-      localStorage.setItem('bare-mux-path', '/baremux/worker.js');
-    });
-  });
 }
 
 function showSecurePopup() {
