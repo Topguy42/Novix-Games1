@@ -8,7 +8,11 @@ import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import { scramjetPath } from "@mercuryworkshop/scramjet/path";
 import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
+import { randomBytes } from 'crypto';
 import path, { join } from "node:path";
+import IPv6Rotator from './ipv6-rotator.js';
+import http from 'http';
+import https from 'https';
 import { hostname } from "node:os";
 import { fileURLToPath } from "node:url";
 import session from "express-session";
@@ -31,6 +35,24 @@ import net from "node:net";
 import cluster from "node:cluster";
 import { randomUUID } from "crypto";
 
+const ipv6Rotator = new IPv6Rotator('2001:470:8:5ac');
+
+function createRotatingAgent(protocol = 'http') {
+  const Agent = protocol === 'https' ? https.Agent : http.Agent;
+  
+  return class RotatingAgent extends Agent {
+    createConnection(options, callback) {
+      options.localAddress = ipv6Rotator.generateRandomIP();
+      options.family = 6;
+      console.log(`[${protocol.toUpperCase()}] Using IPv6: ${options.localAddress}`);
+      return super.createConnection(options, callback);
+    }
+  };
+}
+
+const RotatingHttpAgent = createRotatingAgent('http');
+const RotatingHttpsAgent = createRotatingAgent('https');
+
 dotenv.config();
 const envFile = `.env.${process.env.NODE_ENV || 'production'}`;
 if (fs.existsSync(envFile)) { dotenv.config({ path: envFile }); }
@@ -38,11 +60,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicPath = "public";
 const bare = createBareServer("/bare/", {
-  requestOptions: {
-    agent: false, 
-  }
+  httpAgent: new RotatingHttpAgent({ keepAlive: true }),
+  httpsAgent: new RotatingHttpsAgent({ keepAlive: true })
 });
-const barePremium = createBareServer("/api/bare-premium/");
+const barePremium = createBareServer("/api/bare-premium/", {
+  httpAgent: new RotatingHttpAgent({ keepAlive: true }),
+  httpsAgent: new RotatingHttpsAgent({ keepAlive: true })
+});
+
 const app = express();
 app.use(cookieParser());
 
