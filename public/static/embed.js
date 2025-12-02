@@ -7,7 +7,13 @@ let destination = '';
 try {
   destination = new URL(location.hash.slice(1));
 
-  if (destination.hostname.endsWith('.youtube.com') || destination.hostname === 'youtube.com' || destination.hostname === 'youtube-nocookie.com' || destination.hostname.endsWith('.google.com') || destination.hostname === ('google.com')) {
+  if (
+    destination.hostname.endsWith('.youtube.com') ||
+    destination.hostname === 'youtube.com' ||
+    destination.hostname === 'youtube-nocookie.com' ||
+    destination.hostname.endsWith('.google.com') ||
+    destination.hostname === 'google.com'
+  ) {
     __uv$config.bare = '/api/bare-premium/bare/';
     self.__uv$config = __uv$config;
   }

@@ -8,10 +8,7 @@ const widgetButton = document.querySelector('.widget-button');
 const widgetPopup = document.querySelector('.widget-popup');
 const widgetOptions = document.querySelectorAll('.widget-option');
 
-if (
-  (location.pathname.endsWith('index.html') && location.hash === '#blank') ||
-  location.href.endsWith('#blank')
-) {
+if ((location.pathname.endsWith('index.html') && location.hash === '#blank') || location.href.endsWith('#blank')) {
   const win = window.open();
   const iframe = win.document.createElement('iframe');
   iframe.src = location.origin + location.pathname.replace('index.html', '') + '/';
