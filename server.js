@@ -164,16 +164,20 @@ class PersistentSessionStore extends session.Store {
     try {
       const sess = this.sessions.get(sid);
       if (sess) {
+        console.log(`[SessionStore.get] Found session in memory: ${sid}`);
         return callback(null, sess);
       }
       const row = sessionDb.prepare('SELECT sess FROM sessions WHERE sid = ? AND expire > ?').get(sid, Date.now());
       if (row) {
         const sess = JSON.parse(row.sess);
         this.sessions.set(sid, sess);
+        console.log(`[SessionStore.get] Found session in database: ${sid}`);
         return callback(null, sess);
       }
+      console.log(`[SessionStore.get] Session not found: ${sid}`);
       callback(null, null);
     } catch (err) {
+      console.error(`[SessionStore.get] Error retrieving session: ${sid}`, err);
       callback(err);
     }
   }
