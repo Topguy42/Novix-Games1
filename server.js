@@ -120,10 +120,14 @@ app.use("/bare/", apiLimiter);
 app.use("/api/", apiLimiter);
 
 app.use(cors({
-  origin: true,
+  origin: function(origin, callback) {
+    // Allow all origins
+    callback(null, true);
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'DELETE', 'PUT'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+  exposedHeaders: ['Set-Cookie'],
   maxAge: 86400
 }));
 app.use(express.json());
