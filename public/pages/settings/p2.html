@@ -900,20 +900,53 @@
       }
     });
 
+    document.getElementById('signout-btn').addEventListener('click', async () => {
+      try {
+        const response = await fetch('/api/signout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+
+        if (response.ok) {
+          // Clear logged-in state
+          localStorage.removeItem('loggedInUser');
+          localStorage.removeItem('user_data');
+          showPopup('Signed out successfully', 'success');
+          setTimeout(() => {
+            if (window.parent !== window) {
+              const iframe = window.frameElement;
+              if (iframe) {
+                iframe.src = '/pages/settings/p.html';
+              }
+            } else {
+              window.location.href = '/pages/settings/p.html';
+            }
+          }, 500);
+        } else {
+          showPopup('Sign out failed', 'error');
+        }
+      } catch (error) {
+        showPopup('Sign out error', 'error');
+      }
+    });
+
     document.getElementById('delete-account-btn').addEventListener('click', async () => {
       if (!confirm('Are you sure you want to delete your account? This cannot be undone.')) {
         return;
       }
-      
+
       try {
         const response = await fetch('/api/delete-account', {
           method: 'DELETE',
           credentials: 'include'
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
+          // Clear logged-in state when deleting account
+          localStorage.removeItem('loggedInUser');
+          localStorage.removeItem('user_data');
           showPopup('Account deleted', 'success');
           setTimeout(() => {
             if (window.parent !== window) {
