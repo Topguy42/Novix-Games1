@@ -354,6 +354,7 @@ app.post("/api/upload-profile-pic", pfpLimiter, (req, res) => {
 });
 
 app.post("/api/signin", signinHandler);
+app.post("/api/signout", signoutHandler);
 app.post('/api/admin/user-action', adminUserActionHandler);
 app.post('/api/comment', addCommentHandler);
 app.get('/api/comments', getCommentsHandler);
