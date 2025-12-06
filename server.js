@@ -198,12 +198,6 @@ setInterval(() => {
 
 const store = new SqliteSessionStore();
 
-// Debug middleware to log sessions
-app.use((req, res, next) => {
-  console.log(`[SESSION] ${req.method} ${req.path} - SID: ${req.sessionID}, User: ${req.session?.user?.email || 'none'}`);
-  next();
-});
-
 app.use(session({
   store: store,
   secret: process.env.SESSION_SECRET,
