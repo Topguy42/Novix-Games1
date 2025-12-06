@@ -191,8 +191,10 @@ class PersistentSessionStore extends session.Store {
         JSON.stringify(sess),
         expire
       );
+      console.log(`[SessionStore.set] Saved session: ${sid}, has user: ${sess.user ? 'yes' : 'no'}`);
       callback(null);
     } catch (err) {
+      console.error(`[SessionStore.set] Error saving session: ${sid}`, err);
       callback(err);
     }
   }
