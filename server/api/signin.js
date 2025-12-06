@@ -49,7 +49,8 @@ export async function signinHandler(req, res) {
       }
 
       console.log(`[SIGNIN] User ${email} logged in, session ID: ${req.sessionID}`);
-      return res.status(200).json({
+      console.log(`[SIGNIN] Response headers before sending:`, res.getHeaders());
+      const response = {
         user: {
           id: user.id,
           email: user.email,
@@ -63,7 +64,9 @@ export async function signinHandler(req, res) {
           }
         },
         message: 'Signin successful'
-      });
+      };
+      console.log(`[SIGNIN] Sending response:`, JSON.stringify(response));
+      return res.status(200).json(response);
     });
   } catch (error) {
     console.error('Signin error:', error);
