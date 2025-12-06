@@ -247,6 +247,18 @@ app.use(session({
   }
 }));
 
+// Debug middleware to log API responses
+app.use('/api/', (req, res, next) => {
+  const originalJson = res.json;
+  res.json = function(data) {
+    console.log(`[API Response] ${req.method} ${req.path} - Status: ${res.statusCode}`);
+    console.log(`[API Response] Headers:`, res.getHeaders());
+    console.log(`[API Response] Session ID: ${req.sessionID}, Has user: ${req.session?.user ? 'yes' : 'no'}`);
+    return originalJson.call(this, data);
+  };
+  next();
+});
+
 app.use(
   "/api/gn-math/covers",
   createProxyMiddleware({
